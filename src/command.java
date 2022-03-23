@@ -21,19 +21,19 @@ class command extends Thread {
                 }
             switch (result.charAt(len - 1)) {
                 case 'z':
-                    System.out.println("Z");
+                    System.out.println("1");
                     break;
 
                 case 's':
-                    System.out.println("S");
+                    System.out.println("2");
                     break;
 
                 case 'q':
-                    System.out.println("Q");
+                    System.out.println("3");
                     break;
 
                 case 'd':
-                    System.out.println("D");
+                    System.out.println("4");
                     break;
 
                 default:
