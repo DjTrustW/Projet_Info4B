@@ -16,7 +16,6 @@ class command extends Thread {
             if (result.equals("END"))
                 try {
                     scanner.close();
-                    this.stop();
                 } catch (Exception e) {
                 }
             switch (result.charAt(len - 1)) {
