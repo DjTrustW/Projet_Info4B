@@ -1,12 +1,10 @@
 import java.io.*;
 
-class ReadLevel
-{
-    public static void main(String[] args)
-    {
-        try
-        {
-            InputStream fichierMatrice = new FileInputStream("matrice.txt"); 
+class ReadLevel{
+    public static void main(String[] args){
+        try{
+            File file = new File("./matrice.txt");
+            InputStream fichierMatrice = new FileInputStream(file); 
             InputStreamReader lecture = new InputStreamReader(fichierMatrice);
             BufferedReader textBuffer = new BufferedReader(lecture);
             String ligne;
@@ -16,8 +14,8 @@ class ReadLevel
             }
             textBuffer.close(); 
         }		
-        catch (Exception e)
-        {
+
+        catch (Exception e){
             e.printStackTrace();
         }
     }
