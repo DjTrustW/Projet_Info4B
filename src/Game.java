@@ -20,7 +20,6 @@ public class Game extends Thread {
 
         while(true){
             this.level.show();
-            this.sleep(1000);
         }
     }
 }
