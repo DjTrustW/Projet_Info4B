@@ -19,4 +19,17 @@ public class Menu{
         return menu;
     }
 
+    public String getGameMenu(){
+
+        String menu = "";
+        menu += "||====================================||\n";
+        menu += "||              1.Solo                ||\n";
+        menu += "||              2.Multijoueur         ||\n";
+        menu += "||              3.Retour              ||\n";
+        menu += "||                                    ||\n";
+        menu += "||====================================||\n";
+
+        return menu;
+    }
+
 }

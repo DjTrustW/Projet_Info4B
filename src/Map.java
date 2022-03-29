@@ -6,6 +6,10 @@ public class Map {
         this.map = tab;
     }
 
+    public Map(Map m){
+        this.map = m.getLevel();
+    }
+
     public Map(int x,int y){
         this.map = new int[x][y];
     }

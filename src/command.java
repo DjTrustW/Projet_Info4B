@@ -1,44 +1,55 @@
-import java.util.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-class command extends Thread {
+public class Command implements KeyListener {
 
-    private String result;
-    private int len;
+	private Map lvl;
+	private int size_x, size_y, x, y;
 
-    public command() {
-    }
+	Command(Map level) {
+		this.lvl = level;
+		size_x = this.lvl.getLevel().length;
+		size_y = this.lvl.getLevel()[0].length;
+		x = size_x/2;y = size_y/2;
+	}
 
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
-        while (true) {
-            result = scanner.next();
-            len = result.length();
-            if (result.equals("END"))
-                try {
-                    scanner.close();
-                } catch (Exception e) {
-                }
-            switch (result.charAt(len - 1)) {
-                case 'z':
-                    System.out.println("1");
-                    break;
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_D) {
+			if (x != size_x) {
+				x += 1;
+				System.out.println("Moving Right");
+			} else
+				System.out.println("Cannot Move Right");
+		}
+		if (e.getKeyCode() == KeyEvent.VK_Q) {
+			if (x != 0) {
+				x -= 1;
+				System.out.println("Moving Left");
+			} else
+				System.out.println("Cannot Move Left");
+		}
+		if (e.getKeyCode() == KeyEvent.VK_S) {
+			if (y != size_y) {
+				y += 1;
+				System.out.println("Moving Down");
+			} else
+				System.out.println("Cannot Move Down");
+		}
+		if (e.getKeyCode() == KeyEvent.VK_Z) {
+			if (y != 0) {
+				y -= 1;
+				System.out.println("Moving Up");
+			} else
+				System.out.println("Cannot Move Up");
+		}
+	}
 
-                case 's':
-                    System.out.println("2");
-                    break;
+	@Override
+	public void keyReleased(KeyEvent e) {
+	}
 
-                case 'q':
-                    System.out.println("3");
-                    break;
-
-                case 'd':
-                    System.out.println("4");
-                    break;
-
-                default:
-                    break;
-            }
-        }
-    }
-
+	@Override
+	public void keyTyped(KeyEvent e) {
+	}
 }

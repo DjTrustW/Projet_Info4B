@@ -1,9 +1,10 @@
-import java.util.*;
 
 public class Runner {
 
+
     public static void main(String[] args) throws InterruptedException {
 
+        /*
         Scanner sc = new Scanner(System.in);
         int result;
 
@@ -11,5 +12,10 @@ public class Runner {
         System.out.println(m.getMainMenu());
         result = sc.nextInt();
         sc.close();
+        */
+
+        Game g = new Game();
+        g.start();
+
     }
 }

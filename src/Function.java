@@ -1,9 +1,13 @@
 import java.io.*;
 
-class ReadLevel{
-    public static void main(String[] args){
+public class Function {
+
+    public Function(){}
+
+    public Map ReadLevel(String path){
+
         try{
-            File file = new File("./matrice.txt");
+            File file = new File(path);
             InputStream fichierMatrice = new FileInputStream(file); 
             InputStreamReader lecture = new InputStreamReader(fichierMatrice);
             BufferedReader textBuffer = new BufferedReader(lecture);
@@ -19,12 +23,13 @@ class ReadLevel{
             }
             level.show();
             textBuffer.close(); 
+            return level;
         }		
-
+    
         catch (Exception e){
             e.printStackTrace();
+            return null;
         }
 
-        
     }
 }
