@@ -1,40 +1,45 @@
+import java.util.*;
+import java.io.*;
+
+
 class Affichage extends Thread {
+
+    private Map mapHere;
+    private Vie vieJoueur;
+    private Points pointsJoueur;
+    public boolean lock;
+
+    public Affichage(Map mapHere,Vie vieJoueur,Points pointsJoueur)
+    {
+        this.mapHere = mapHere;
+        this.vieJoueur= vieJoueur;
+        this.pointsJoueur=pointsJoueur;
+        this.lock = true;
+    }
+
     public void run() {
         
-        Map mapHere = getLevel();
         while(lock)
         {
-            mapHere.show();
-
             try
             {
+                System.out.println(this.show());
                 this.sleep(1000);
             } 
             catch (Exception e){e.printStackTrace();}
         }
     }
 
-    private String name;
-    private boolean deverrouille; //revoir
 
-    public String getName()
-    { 
-        this.name = name;
+    public String show()throws IOException{
+        
+        String laMap = "";
+        laMap += this.mapHere.affiche()+"\n"; 
+        laMap += this.vieJoueur.affiche()+" "+this.pointsJoueur.affiche();
 
-    }
-    public void setName(String name)
-    {
-        this.name = name; 
+        return laMap;
     }
 
-}
     
-class Affichage{
-    public static void main ( String [] args ) throws Exception 
-    {
-        Thread aff = new Affichage();
 
-        aff.start();
-
-    }
 }

@@ -1,3 +1,6 @@
+import java.util.*;
+import java.io.*;
+
 public class Map {
     
     private int[][] map;
@@ -9,6 +12,22 @@ public class Map {
     public Map(int x,int y){
         this.map = new int[x][y];
     }
+
+    public Map(String emplacementLevel)throws IOException{
+        BufferedReader matrice = new BufferedReader(new FileReader(emplacementLevel));
+        this.map = new int[10][10];
+
+        for(int i=0;i<10;i++)
+        {
+            String st1 = matrice.readLine();
+            for(int j = 0;j<10;j++)
+            {
+                this.map[i][j]= Integer.parseInt(""+st1.charAt(j));
+            }
+        }
+
+    }
+
 
     public int[][] getLevel(){
         return this.map;
@@ -24,10 +43,39 @@ public class Map {
 
     public void show(){
         for(int i=0;i<10;i++){
-            for(int j =0 ;j<10;j++){
+            for(int j=0;j<10;j++){
                 System.out.print(this.map[i][j]);
             }
             System.out.println();
         }
     }
+
+
+    public String affiche(){
+
+        String laMap="";
+
+        for(int i =0; i<this.map.length;i++) {
+            for(int j=0;j<this.map[i].length;j++) {
+                
+                switch(this.map[i][j]){
+                    case 0 : laMap+=" ";break; //vide
+                    case 1 : laMap+="*";break; //bloc incassable
+                    case 2 : laMap+="#";break; //brique, creusable
+                    case 3 : laMap+="H";break; //échelle
+                    case 4 : laMap+="_";break; //tyrolienne
+                    case 5 : laMap+="!";break; //ennemi
+                    case 6 : laMap+="?";break; //joueur
+                    case 7 : laMap+="E";break; //élément ramassable
+                    case 8 : laMap+="T";break; //échelle la plus haute, observée comme corde au plafond
+                }
+                
+            }
+            laMap+="\n";
+        }
+
+        return laMap;
+    }
+
+
 }
