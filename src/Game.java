@@ -2,8 +2,7 @@ import java.util.*;
 
 public class Game extends Thread {
 
-    private ArrayList<Player> List_player;
-    ///private ArrayList<Enemy> list_Enemy;
+    private Player p;
     private Map level;
     private Function f;
 
@@ -11,8 +10,7 @@ public class Game extends Thread {
 
         this.f = new Function();
         this.level = f.ReadLevel("./matrice.txt");
-        this.List_player = new ArrayList<Player>();
-        this.List_player.add(new Player(new Command(this.level), 0));
+        this.p = new Player(new Command(this.level), 0);
 
     }
 
