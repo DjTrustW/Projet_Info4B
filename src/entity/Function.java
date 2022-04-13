@@ -1,3 +1,4 @@
+package entity;
 import java.io.*;
 
 public class Function {
@@ -12,7 +13,7 @@ public class Function {
             InputStreamReader lecture = new InputStreamReader(fichierMatrice);
             BufferedReader textBuffer = new BufferedReader(lecture);
             String ligne;
-            Map level = new Map(10,10);
+            Map level = new Map(20,80);
             int x =0;
             while ((ligne=textBuffer.readLine()) != null)
             {
@@ -21,7 +22,6 @@ public class Function {
                 }
                 x++;
             }
-            level.show();
             textBuffer.close(); 
             return level;
         }		
@@ -32,4 +32,22 @@ public class Function {
         }
 
     }
+
+    /*public Level Roulette(){
+
+        int randomJ = (int)(Math.random()*9);
+
+        for(int i=0;i<=randomJ;i++)
+        {
+            //faire défiler un à un les usertag dans uu jusqu'à celui sélectionné 
+        }
+
+        Level MultiLevel = null ;
+        //usertag.getLevelChoisi()
+
+        return MultiLevel;
+
+    }*/
+
+
 }
