@@ -20,7 +20,7 @@ class Affichage extends Thread {
             try
             {
                 System.out.println(this.show());
-                this.sleep(50);
+                this.sleep(16);
             } 
             catch (Exception e){e.printStackTrace();}
         }

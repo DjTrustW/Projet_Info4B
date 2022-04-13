@@ -12,9 +12,9 @@ public class Game extends Thread {
 
         this.f = new Function();
         this.aff = new Affichage(this);
-        this.lvl = f.ReadLevel("lvl1.txt");
-        this.currentMap = f.ReadLevel("lvl1.txt");
-        this.p = new Player(0,"UwU", lvl);
+        this.lvl = f.ReadLevel("./level/level"+i+".txt");
+        this.currentMap = f.ReadLevel("./level/level"+i+".txt");
+        this.p = new Player(0,"UwU", currentMap);
     }
 
     public Map getMap(){
