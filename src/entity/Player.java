@@ -96,17 +96,10 @@ public class Player extends Thread {
 
     public synchronized void move(int dir) {
 
-            /*if(map.getCase(x , y)  == 0 && map.getCase(x, y-1 ) == 0 && map.getCase(x, y+1) != 3){
-                y--;
-                move(4);
-            }
-
-            else{*/
             switch (dir) {
 
                 case 1:///s
                     if (canMove(3)) {
-                        System.out.println("x+");
                         this.x++;
 
                     }
@@ -114,7 +107,6 @@ public class Player extends Thread {
 
                 case 2:///z
                     if (canMove(4)) {
-                        System.out.println("x-");
                         this.x--;
 
                     }
@@ -122,15 +114,27 @@ public class Player extends Thread {
 
                 case 3:///d
                     if (canMove(1)) {
-                        System.out.println("y+");
                         this.y++;
+                        if(map.getCase(x , y)  == 0 && map.getCase(x+1, y) == 0 && map.getCase(x-1, y) != 4){
+                            x++;
+                            try {
+                                this.sleep(50);
+                            } catch (Exception e) {}
+                            move(1);
+                        }
 
                     }
                     break;
                 case 4:///q
                     if (canMove(2)) {
-                        System.out.println("y-");
                         this.y--;
+                        if(map.getCase(x , y)  == 0 && map.getCase(x+1, y) == 0 && map.getCase(x-1, y) != 4){
+                            x++;
+                            try {
+                                this.sleep(50);
+                            } catch (Exception e) {}
+                            move(1);
+                        }
 
                     }
                     break;
@@ -139,27 +143,32 @@ public class Player extends Thread {
                     break;
             }
         }
-    ///}
+    
 
     public boolean canMove(int i) {
 
         switch (i) {
 
             case 1://d
-                if (this.y < 19 && (map.getCase(x , y+1) == 0 || map.getCase(x , y+1) == 3 || map.getCase(x , y+1) == 7))
+                if (this.y < 79 && (map.getCase(x , y+1) == 0 || map.getCase(x , y+1) == 3 || map.getCase(x , y+1) == 7))
                     return true;
+                break;
+
 
             case 2://q
                 if (this.y >= 0 && (map.getCase(x , y-1) == 0 || map.getCase(x , y-1) == 3 || map.getCase(x , y-1) == 7))
                     return true;
+                    break;
 
             case 3://s
-                if (this.x >=0 && (map.getCase(x+1, y) == 3))
+                if (this.x <19 && (map.getCase(x+1, y) == 3))
                     return true;
+                break;    
 
             case 4://z
-                if ( this.x <79 && (map.getCase(x-1, y) == 0 || map.getCase(x-1, y) == 3))
+                if ( this.x >=0 && (map.getCase(x-1, y) == 3))
                     return true;
+                    break;
 
             default:
                 break;

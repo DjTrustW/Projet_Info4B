@@ -20,11 +20,8 @@ public class Map {
     }
 
     public void setlevel(Map m){
-        for(int i =0 ;i>m.getLevel().length;i++){
-            for(int j = 0; i>m.getLevel()[i].length;j++){
-                setCase(i, j, m.getCase(i, j));
-            }
-        }
+        for(int i = 0; i < m.getLevel().length; i++)
+        this.map[i] =  m.getLevel()[i].clone();
     }
 
     public void setCase(int x, int y,int value){

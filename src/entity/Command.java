@@ -14,7 +14,6 @@ public class Command implements KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 
-		System.out.println("z");
 		if (e.getKeyCode() == KeyEvent.VK_Z)
 			p1.move(2);//ok
 
