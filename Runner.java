@@ -5,7 +5,7 @@ public class Runner {
 
     public static void main(String[] args) throws IOException {
 
-        Map map = new Map("matrice.txt");
+        Map map = new Map("Level2.txt");
         Vie vie = new Vie();
         Points points = new Points();
 

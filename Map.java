@@ -15,12 +15,12 @@ public class Map {
 
     public Map(String emplacementLevel)throws IOException{
         BufferedReader matrice = new BufferedReader(new FileReader(emplacementLevel));
-        this.map = new int[10][10];
+        this.map = new int[20][80];
 
-        for(int i=0;i<10;i++)
+        for(int i=0;i<20;i++)
         {
             String st1 = matrice.readLine();
-            for(int j = 0;j<10;j++)
+            for(int j = 0;j<80;j++)
             {
                 this.map[i][j]= Integer.parseInt(""+st1.charAt(j));
             }
@@ -42,13 +42,14 @@ public class Map {
     }
 
     public void show(){
-        for(int i=0;i<10;i++){
-            for(int j=0;j<10;j++){
+        for(int i=0;i<20;i++){
+            for(int j=0;j<80;j++){
                 System.out.print(this.map[i][j]);
             }
             System.out.println();
         }
     }
+    
 
 
     public String affiche(){
@@ -56,7 +57,7 @@ public class Map {
         String laMap="";
 
         for(int i =0; i<this.map.length;i++) {
-            for(int j=0;j<this.map[i].length;j++) {
+            for(int j=0;j<this.map[i].length;j++){
                 
                 switch(this.map[i][j]){
                     case 0 : laMap+=" ";break; //vide
