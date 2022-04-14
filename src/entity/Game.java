@@ -22,11 +22,11 @@ public class Game extends Thread {
         int [][][] spawn = lvl.getSpawn();
         this.tabH = new ArrayList<Player>();
         this.tabE = new ArrayList<Player>();
-        this.tabH.add(new Player(ind, "UwU", this.currentMap, spawn[0][0][0], spawn[0][0][1], false));
+        this.tabH.add(new Player(ind, "UwU", this.currentMap, spawn[0][0][0], spawn[0][0][1], false,false));
         this.ind++;
 
         for (int nb =1 ; i<spawn[2].length;i++){
-            this.tabE.add(new Player(this.ind, ("mechant_"+this.ind), this.currentMap, spawn[1][nb][0], spawn[1][nb][1], true));
+            this.tabE.add(new Player(this.ind, ("mechant_"+this.ind), this.currentMap, spawn[1][nb][0], spawn[1][nb][1], true,true));
             this.ind++;
         }
         

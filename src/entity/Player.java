@@ -6,36 +6,45 @@ import java.awt.Label;
 
 public class Player extends Thread {
 
-    private Command cmd;
-    final private String name;
-    private Map map;
     final private int ind;
+    final private String name;
+    final private boolean evil;
+    private Command cmd;
+    private Bot beep;
+    private Map map;
     private Vie life;
     private Points score;
     private int x, y ;
     private int x_spawn, y_spawn;
-    final private boolean evil;
 
-    public Player(int i, String n, Map m,int x,int y,boolean evil) {
-
-        Frame f = new Frame("Demo");
-        f.setLayout(new FlowLayout());
-        f.setSize(100, 100);
-        Label l = new Label();
-        l.setText(n);
-        f.add(l);
-        f.setVisible(true);
+    public Player(int i, String n, Map m,int x,int y,boolean evil,boolean IA) {
 
         this.map = m;
         this.name = n;
         this.ind = i;
-        this.cmd = new Command(this);
-        f.addKeyListener(this.cmd);
-        this.life = new Vie(5 );
+        this.life = new Vie(5);
         this.score = new Points();
         this.x = this.x_spawn = x;
         this.y = this.y_spawn = y;
         this.evil = evil;
+
+        if(!IA){
+            Frame f = new Frame("Projet_Info4B");
+            f.setLayout(new FlowLayout());
+            f.setSize(100, 100);
+            Label l = new Label();
+            l.setText(n);
+            f.add(l);
+            f.setVisible(true);
+            this.cmd = new Command(this);
+            f.addKeyListener(this.cmd);
+        }
+
+        else{
+            this.beep = new Bot(this);
+            this.beep.start();
+        }
+
     }
 
     public void setCommand(Command c) {
@@ -107,7 +116,7 @@ public class Player extends Thread {
     }
 
     public synchronized void fall(){
-        if ((map.getCase(x, y) == 0|| map.getCase(x , y) == 4)  && (map.getCase(x + 1, y) == 0 || map.getCase(x + 1, y) == 4) && map.getCase(x - 1, y) != 4) {
+        if ((map.getCase(x, y) == 0|| map.getCase(x , y) == 4)  && (map.getCase(x + 1, y) == 0 || map.getCase(x + 1, y) == 4 || map.getCase(x + 1, y) == 7) && map.getCase(x - 1, y) != 4) {
             x++;
             fall();
         }
@@ -193,12 +202,12 @@ public class Player extends Thread {
                 break;
 
             case 3:// s
-                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x + 1, y ) == 5 || (map.getCase(x - 1, y ) == 4 && !(map.getCase(x+1, y ) == 1 || map.getCase(x+1, y ) == 2))))
+                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x, y + 1) == 7  || map.getCase(x + 1, y ) == 5 || (map.getCase(x - 1, y ) == 4 && !(map.getCase(x+1, y ) == 1 || map.getCase(x+1, y ) == 2))))
                     return true;
                 break;
 
             case 4:// z
-                if (this.x >= 0 && (map.getCase(x - 1, y) == 3|| map.getCase(x -1, y ) == 5))
+                if (this.x >= 0 && (map.getCase(x - 1, y) == 3 || map.getCase(x, y + 1) == 7  || map.getCase(x -1, y ) == 5))
                     return true;
                 break;
         }
@@ -237,8 +246,6 @@ public class Player extends Thread {
     }
 
     public void run(){
-        try {
-            this.cmd=null;
-        } catch (Exception e) {}
+
     }
 }
