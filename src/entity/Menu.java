@@ -7,7 +7,7 @@ public class Menu {
     public Menu() {
     }
 
-    public String getMainMenu() { /// 1
+    private String getMainMenu() { /// 1
 
         String menu = "";
 
@@ -37,7 +37,7 @@ public class Menu {
         return menu;
     }
 
-    public String getGameMenu() { /// 2
+    private String getGameMenu() { /// 2
 
         String menu = "";
 
@@ -67,10 +67,10 @@ public class Menu {
         return menu;
     }
 
-    public String getVersusMenu() { /// 3
+    private String getVersusMenu() { /// 3
 
         String menu = "";
-        
+
         menu += "||================================================================================||\n";
         menu += "||                                                                                ||\n";
         menu += "||                                                                                ||\n";
@@ -97,7 +97,7 @@ public class Menu {
         return menu;
     }
 
-    public String getServeurMenu() { /// 4
+    private String getServeurMenu() { /// 4
 
         String menu = "";
         menu += "||================================================================================||\n";
@@ -124,7 +124,7 @@ public class Menu {
         return menu;
     }
 
-    public String waitMenuClient() { /// 5
+    private String waitMenuClient() { /// 5
 
         String menu = "";
         menu += "||================================================================================||\n";
@@ -153,7 +153,7 @@ public class Menu {
         return menu;
     }
 
-    public String getReseauMenu() { /// 6
+    private String getReseauMenu() { /// 6
 
         String menu = "";
         menu += "||================================================================================||\n";
@@ -182,7 +182,7 @@ public class Menu {
         return menu;
     }
 
-    public String getMultiModeMenu() { /// 7
+    private String getMultiModeMenu() { /// 7
 
         String menu = "";
 
@@ -212,7 +212,7 @@ public class Menu {
         return menu;
     }
 
-    public String getLevelSelectorMenu() { /// 8
+    private String getLevelSelectorMenu() { /// 8
 
         String menu = "";
 
@@ -242,7 +242,7 @@ public class Menu {
         return menu;
     }
 
-    public String getLevelMultiSelectorMenu() { /// 9
+    private String getLevelMultiSelectorMenu() { /// 9
 
         String menu = "";
 
@@ -272,7 +272,7 @@ public class Menu {
         return menu;
     }
 
-    public String getClientMenu() { /// 10
+    private String getClientMenu() { /// 10
 
         String menu = "";
 
@@ -364,7 +364,7 @@ public class Menu {
                             break;
 
                         case 2:
-                            //choisi parmi les socket lequel sera hero
+                            // choisi parmi les socket lequel sera hero
                             break;
 
                         case 3:
@@ -381,15 +381,12 @@ public class Menu {
                     switch (result) {
 
                         case 1:
-                            ///creer serveur
-                            ///lance serveur
+                            /// creer serveur
+                            /// lance serveur
                             break;
 
                         case 2:
                             choix = 6;
-                            break;
-
-                        default:
                             break;
                     }
                     break;
@@ -410,9 +407,6 @@ public class Menu {
 
                         case 3:
                             choix = 2;
-                            break;
-
-                        default:
                             break;
                     }
 
@@ -435,9 +429,6 @@ public class Menu {
                         case 3:
                             choix = 6;
                             break;
-
-                        default:
-                            break;
                     }
 
                     break;
@@ -445,29 +436,31 @@ public class Menu {
                 case 8:
                     System.out.println(getLevelSelectorMenu());
                     result = sc.nextInt();
-                    
 
                     switch (result) {
 
                         case 1:
                             System.out.println("niveau dispo de 1 a 2");
                             int tmp = sc.nextInt();
-                            Game g = new Game(tmp);
-                            g.start();
-                            g.join();
+                            Game g1 = new Game(tmp);
+                            g1.start();
+                            try {
+                                g1.join();
+                            } catch (Exception e) {
+                            }
                             break;
 
                         case 2:
-                            Game g = new Game(0);
-                            g.start();
-                            g.join();
+                            Game g2 = new Game((int) (Math.random() * 2) + 1);
+                            g2.start();
+                            try {
+                                g2.join();
+                            } catch (Exception e) {
+                            }
                             break;
 
                         case 3:
                             choix = 2;
-                            break;
-
-                        default:
                             break;
                     }
 
@@ -479,18 +472,29 @@ public class Menu {
                     switch (result) {
 
                         case 1:
-
+                            /// ajout des socket a faire
+                            System.out.println("niveau dispo de 1 a 2");
+                            int tmp = sc.nextInt();
+                            Game g3 = new Game(tmp);
+                            g3.start();
+                            try {
+                                g3.join();
+                            } catch (Exception e) {
+                            }
                             break;
 
                         case 2:
-
+                            /// ajout des socket a faire
+                            Game g4 = new Game((int) (Math.random() * 2) + 1);
+                            g4.start();
+                            try {
+                                g4.join();
+                            } catch (Exception e) {
+                            }
                             break;
 
                         case 3:
-
-                            break;
-
-                        default:
+                            choix = 7;
                             break;
                     }
 
@@ -499,11 +503,11 @@ public class Menu {
                 case 10:
                     System.out.println(getClientMenu());
                     result = sc.nextInt();
-
+                    /// a voir
                     switch (result) {
 
                         case 1:
-                            choix = 7;
+                            choix = 5;
                             break;
 
                         case 2:
@@ -513,58 +517,8 @@ public class Menu {
                         case 3:
                             choix = 6;
                             break;
-
-                        default:
-                            break;
                     }
 
-                    break;
-
-                case 11:
-
-                    switch (result) {
-
-                        case 1:
-
-                            break;
-
-                        case 2:
-
-                            break;
-
-                        case 3:
-
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    break;
-
-                case 12:
-
-                    switch (result) {
-
-                        case 1:
-
-                            break;
-
-                        case 2:
-
-                            break;
-
-                        case 3:
-
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    break;
-
-                default:
                     break;
             }
 
