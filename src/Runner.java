@@ -7,5 +7,6 @@ public class Runner {
         Game g = new Game(0);
         g.start();
         g.join();
+        
     }
 }

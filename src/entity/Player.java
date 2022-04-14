@@ -193,16 +193,13 @@ public class Player extends Thread {
                 break;
 
             case 3:// s
-                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x-1,y) == 4|| map.getCase(x+1, y ) == 5))
+                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x + 1, y ) == 5 || (map.getCase(x - 1, y ) == 4 && !(map.getCase(x+1, y ) == 1 || map.getCase(x+1, y ) == 2))))
                     return true;
                 break;
 
             case 4:// z
                 if (this.x >= 0 && (map.getCase(x - 1, y) == 3|| map.getCase(x -1, y ) == 5))
                     return true;
-                break;
-
-            default:
                 break;
         }
         return false;
@@ -237,5 +234,11 @@ public class Player extends Thread {
             }
 
         }
+    }
+
+    public void run(){
+        try {
+            this.cmd=null;
+        } catch (Exception e) {}
     }
 }
