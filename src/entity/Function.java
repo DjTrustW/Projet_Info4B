@@ -13,16 +13,17 @@ public class Function {
             InputStreamReader lecture = new InputStreamReader(fichierMatrice);
             BufferedReader textBuffer = new BufferedReader(lecture);
             String ligne;
-            Map level = new Map(20,80);
+            int[][] m = new int[20][80];
             int x =0;
             while ((ligne=textBuffer.readLine()) != null)
             {
                 for(int i=0;i<ligne.length();i++){
-                    level.setCase(x, i,Integer.parseInt(String.valueOf(ligne.charAt(i))));
+                    m[x][i]= Integer.parseInt(String.valueOf(ligne.charAt(i)));
                 }
                 x++;
             }
-            textBuffer.close(); 
+            textBuffer.close();
+            Map level = new Map(m);
             return level;
         }		
     

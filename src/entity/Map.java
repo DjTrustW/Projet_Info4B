@@ -3,17 +3,25 @@ package entity;
 public class Map {
     
     private int[][] map;
+    private int[][] EvilSpawn;
+    private int[][] HeroSpawn;
+    private int[][] CoinSpawn;
+    private Map link;
 
     public Map(int tab[][]){
         this.map = tab;
+        this.HeroSpawn = getHeroSpawn();
+        this.EvilSpawn = getEvilSpawn();
+        this.CoinSpawn = getCoinSpawn();
+        clearmap();
     }
 
     public Map(Map m){
         this.map = m.getLevel();
-    }
-
-    public Map(int x,int y){
-        this.map = new int[x][y];
+        this.HeroSpawn = getHeroSpawn();
+        this.EvilSpawn = getEvilSpawn();
+        this.CoinSpawn = getCoinSpawn();
+        clearmap();
     }
 
     public int[][] getLevel(){
@@ -33,7 +41,7 @@ public class Map {
         return this.map[x][y];
     }
 
-    public int[][] getHeroSpawn(){
+    private int[][] getHeroSpawn(){
 
         int nb = 0;
         for(int i=0;i<20;i++){
@@ -48,7 +56,7 @@ public class Map {
         int [][] slt = new int [nb][2];
         nb =0;
         for(int i=0;i<20;i++){
-            for(int j =0 ;j<80;j++){
+            for(int j = 0 ;j<80;j++){
                 
                 if(getCase(i, j) == 6){
                     slt[nb][0] =  i;
@@ -60,13 +68,13 @@ public class Map {
         return slt;
     }
 
-    public int[][] getEvilSpawn(){
+    private int[][] getEvilSpawn(){
 
         int nb = 0;
         for(int i=0;i<20;i++){
             for(int j =0 ;j<80;j++){
                 
-                if(getCase(i, j) == 6){
+                if(getCase(i, j) == 5){
                     nb++;
                 }
             }
@@ -85,6 +93,78 @@ public class Map {
             }
         }
         return slt;
+    }
+
+    private int[][] getCoinSpawn(){
+
+        int nb = 0;
+        for(int i=0;i<20;i++){
+            for(int j =0 ;j<80;j++){
+                
+                if(getCase(i, j) == 7){
+                    nb++;
+                }
+            }
+        }
+
+        int [][] slt = new int [nb][2];
+        nb =0;
+        for(int i=0;i<20;i++){
+            for(int j =0 ;j<80;j++){
+                
+                if(getCase(i, j) == 7){
+                    slt[nb][0] =  i;
+                    slt[nb][1] =  j;
+                    nb++;
+                }
+            }
+        }
+        return slt;
+    }
+
+    private void clearmap(){
+        for(int i=0;i<20;i++){
+            for(int j =0 ;j<80;j++){
+                
+                if(getCase(i, j) == 5 || getCase(i, j) == 6 || getCase(i, j) == 7){
+                    setCase(i, j, 0);
+                }
+            }
+        }
+    }
+
+    public int[][][] getSpawn(){
+        int [][][] slt =  {this.HeroSpawn,this.EvilSpawn,this.CoinSpawn};
+        return slt;
+    }
+
+    public void addToMapCoin(){
+        for (int i =0 ; i<this.getLink().getSpawn()[2].length;i++){
+            if(this.getLink().getSpawn()[2][i][0] >0 && this.getLink().getSpawn()[2][i][1] >0){
+                setCase(this.getLink().getSpawn()[2][i][0], this.getLink().getSpawn()[2][i][1], 7);
+            }
+        }
+    }
+
+    public void delToMapCoin(int x,int y){
+
+
+
+        for (int i =0 ; i<this.getLink().getSpawn()[2].length;i++){
+
+            if( this.getLink().getSpawn()[2][i][0] == x  &&  this.getLink().getSpawn()[2][i][1] == y){
+                this.getLink().getSpawn()[2][i][0] = -1;
+                this.getLink().getSpawn()[2][i][1] = -1;
+            }
+        }
+    }
+
+    public void setLink(Map m){
+        this.link = m;
+    }
+
+    public Map getLink(){
+        return this.link;
     }
 
     public void show(){

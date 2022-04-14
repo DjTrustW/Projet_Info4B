@@ -31,10 +31,10 @@ public class Player extends Thread {
         this.ind = i;
         this.cmd = new Command(this);
         f.addKeyListener(this.cmd);
-        this.life = new Vie(5);
+        this.life = new Vie(0);
         this.score = new Points();
         this.x = this.x_spawn = x;
-        this.y = this.y_spawn = x;
+        this.y = this.y_spawn = y;
         this.evil = evil;
     }
 
@@ -106,11 +106,16 @@ public class Player extends Thread {
         return slt;
     }
 
-    public void fall(){
-        if (map.getCase(x, y) == 0 && map.getCase(x + 1, y) == 0 && map.getCase(x - 1, y) != 4) {
+    public synchronized void fall(){
+        if ((map.getCase(x, y) == 0|| map.getCase(x , y) == 4)  && (map.getCase(x + 1, y) == 0 || map.getCase(x + 1, y) == 4) && map.getCase(x - 1, y) != 4) {
             x++;
             fall();
-            
+        }
+        else{
+            try {
+                this.cmd.notify();
+            } catch (Exception e) {}
+        
         }
     }
 
@@ -146,16 +151,23 @@ public class Player extends Thread {
                     }
                     break;
 
-                case 5:/// fall
-
-                    break;
                 default:
                     break;
 
             }
+            try {
+                this.cmd.wait();
+            } catch (Exception e) {
+            }
             fall();
-            if (map.getCase(x, y) == 0){
+            try {
+                this.cmd.notify();
+            } catch (Exception e) {
+            }
+            
+            if (map.getCase(this.x, this.y) == 7){
                 addScore(10);
+                this.map.delToMapCoin(this.x,this.y);
             }
         }
     }
@@ -167,19 +179,17 @@ public class Player extends Thread {
         switch (i) {
 
             case 1:// d
-                if (this.y < 79
-                        && (map.getCase(x, y + 1) == 0 || map.getCase(x, y + 1) == 3 || map.getCase(x, y + 1) == 7))
+                if (this.y < 79 && (map.getCase(x, y + 1) == 0 || map.getCase(x, y + 1) == 3 || map.getCase(x, y + 1) == 7))
                     return true;
                 break;
 
             case 2:// q
-                if (this.y >= 0
-                        && (map.getCase(x, y - 1) == 0 || map.getCase(x, y - 1) == 3 || map.getCase(x, y - 1) == 7))
+                if (this.y >= 0 && (map.getCase(x, y - 1) == 0 || map.getCase(x, y - 1) == 3 || map.getCase(x, y - 1) == 7))
                     return true;
                 break;
 
             case 3:// s
-                if (this.x < 19 && (map.getCase(x + 1, y) == 3))
+                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x-1,y) == 4))
                     return true;
                 break;
 

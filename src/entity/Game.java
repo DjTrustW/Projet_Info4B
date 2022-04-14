@@ -14,8 +14,9 @@ public class Game extends Thread {
         this.aff = new Affichage(this);
         this.lvl = f.ReadLevel("./level/level"+i+".txt");
         this.currentMap = f.ReadLevel("./level/level"+i+".txt");
-        int [][] spawn = lvl.getHeroSpawn();
-        this.p = new Player(i, "UwU", currentMap, spawn[0][0], spawn[0][0], false);
+        this.currentMap.setLink(this.lvl);
+        int [][][] spawn = lvl.getSpawn();
+        this.p = new Player(0, "UwU", this.currentMap, spawn[0][0][0], spawn[0][0][1], false);
     }
 
     public Map getMap(){
@@ -31,8 +32,11 @@ public class Game extends Thread {
     }
 
     public void updateMap(){
+
         this.currentMap.setlevel(this.lvl);
+        this.currentMap.addToMapCoin();
         this.currentMap.setCase(p.getX(), p.getY(),6);
+
     }
 
     public void run() {
@@ -40,7 +44,7 @@ public class Game extends Thread {
         aff.start();
         p.start();
 
-        while(p.getLife().getVieJoueur() >0){
+        while(p.getLife().getVieJoueur() > 0){
             
         }
     }
