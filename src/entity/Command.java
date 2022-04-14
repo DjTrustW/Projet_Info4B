@@ -26,6 +26,12 @@ public class Command implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_D)
 			p1.move(3);//ok
 
+		if (e.getKeyCode() == KeyEvent.VK_A)
+			p1.delBlock(0);
+
+		if (e.getKeyCode() == KeyEvent.VK_E)
+			p1.delBlock(1);
+
 	}
 
 	@Override

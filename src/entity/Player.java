@@ -22,7 +22,7 @@ public class Player extends Thread {
         f.setLayout(new FlowLayout());
         f.setSize(100, 100);
         Label l = new Label();
-        l.setText("This is a Game");
+        l.setText(n);
         f.add(l);
         f.setVisible(true);
 
@@ -31,7 +31,7 @@ public class Player extends Thread {
         this.ind = i;
         this.cmd = new Command(this);
         f.addKeyListener(this.cmd);
-        this.life = new Vie(0);
+        this.life = new Vie(5 );
         this.score = new Points();
         this.x = this.x_spawn = x;
         this.y = this.y_spawn = y;
@@ -165,36 +165,40 @@ public class Player extends Thread {
             } catch (Exception e) {
             }
             
-            if (map.getCase(this.x, this.y) == 7){
+            if (!isEvil() && map.getCase(this.x, this.y) == 7){
                 addScore(10);
                 this.map.delToMapCoin(this.x,this.y);
             }
+
+            if (!isEvil() && map.getCase(this.x, this.y) == 5){
+                this.life.toucheEnnemi();
+                this.x = this.x_spawn;
+                this.y = this.y_spawn;
+            }
         }
     }
-
-
 
     public boolean canMove(int i) {
 
         switch (i) {
 
             case 1:// d
-                if (this.y < 79 && (map.getCase(x, y + 1) == 0 || map.getCase(x, y + 1) == 3 || map.getCase(x, y + 1) == 7))
+                if (this.y < 79 && (map.getCase(x, y + 1) == 0 || map.getCase(x, y + 1) == 3 || map.getCase(x, y + 1) == 7 || map.getCase(x, y + 1) == 5))
                     return true;
                 break;
 
             case 2:// q
-                if (this.y >= 0 && (map.getCase(x, y - 1) == 0 || map.getCase(x, y - 1) == 3 || map.getCase(x, y - 1) == 7))
+                if (this.y >= 0 && (map.getCase(x, y - 1) == 0 || map.getCase(x, y - 1) == 3 || map.getCase(x, y - 1) == 7 ||map.getCase(x, y - 1) == 5))
                     return true;
                 break;
 
             case 3:// s
-                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x-1,y) == 4))
+                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x-1,y) == 4|| map.getCase(x+1, y ) == 5))
                     return true;
                 break;
 
             case 4:// z
-                if (this.x >= 0 && (map.getCase(x - 1, y) == 3))
+                if (this.x >= 0 && (map.getCase(x - 1, y) == 3|| map.getCase(x -1, y ) == 5))
                     return true;
                 break;
 
@@ -202,5 +206,36 @@ public class Player extends Thread {
                 break;
         }
         return false;
+    }
+
+    public void delBlock(int i){
+
+        if (i == 1){
+
+            if (!isEvil() && this.map.getCase(x,y+1) == 2){
+                Block b = new Block(this.map, this.x, this.y+1);
+                b.start();
+            }
+            
+            if (!isEvil() && this.map.getCase(x+1,y+1) == 2){
+                Block b = new Block(this.map, this.x+1, this.y+1);
+                b.start();
+            }
+
+        }
+
+        else{
+
+            if (!isEvil() && this.map.getCase(x,y-1) == 2){
+                Block b = new Block(this.map, this.x, this.y-1);
+                b.start();
+            }
+
+            if (!isEvil() && this.map.getCase(x+1,y-1) == 2){
+                Block b = new Block(this.map, this.x+1, this.y-1);
+                b.start();
+            }
+
+        }
     }
 }

@@ -32,7 +32,7 @@ class Affichage extends Thread {
         String laMap = "";
         this.partie.updateMap();
         laMap += this.partie.getcurrentMap().affiche()+"\n"; 
-        laMap += this.partie.getPlayer().getLife().affiche()+" "+this.partie.getPlayer().getScore().affiche();
+        laMap += this.partie.getPlayer(0).getLife().affiche()+" "+this.partie.getPlayer(0).getScore().affiche();
         return laMap;
     }
 
