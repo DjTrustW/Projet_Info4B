@@ -14,7 +14,8 @@ public class Game extends Thread {
         this.aff = new Affichage(this);
         this.lvl = f.ReadLevel("./level/level"+i+".txt");
         this.currentMap = f.ReadLevel("./level/level"+i+".txt");
-        this.p = new Player(0,"UwU", currentMap);
+        int [][] spawn = lvl.getHeroSpawn();
+        this.p = new Player(i, "UwU", currentMap, spawn[0][0], spawn[0][0], false);
     }
 
     public Map getMap(){

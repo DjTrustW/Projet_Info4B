@@ -1,4 +1,5 @@
 package entity;
+
 public class Map {
     
     private int[][] map;
@@ -30,6 +31,60 @@ public class Map {
 
     public int getCase(int x ,int y){
         return this.map[x][y];
+    }
+
+    public int[][] getHeroSpawn(){
+
+        int nb = 0;
+        for(int i=0;i<20;i++){
+            for(int j =0 ;j<80;j++){
+                
+                if(getCase(i, j) == 6){
+                    nb++;
+                }
+            }
+        }
+
+        int [][] slt = new int [nb][2];
+        nb =0;
+        for(int i=0;i<20;i++){
+            for(int j =0 ;j<80;j++){
+                
+                if(getCase(i, j) == 6){
+                    slt[nb][0] =  i;
+                    slt[nb][1] =  j;
+                    nb++;
+                }
+            }
+        }
+        return slt;
+    }
+
+    public int[][] getEvilSpawn(){
+
+        int nb = 0;
+        for(int i=0;i<20;i++){
+            for(int j =0 ;j<80;j++){
+                
+                if(getCase(i, j) == 6){
+                    nb++;
+                }
+            }
+        }
+
+        int [][] slt = new int [nb][2];
+        nb =0;
+        for(int i=0;i<20;i++){
+            for(int j =0 ;j<80;j++){
+                
+                if(getCase(i, j) == 5){
+                    slt[nb][0] =  i;
+                    slt[nb][1] =  j;
+                    nb++;
+                }
+            }
+        }
+        return slt;
     }
 
     public void show(){

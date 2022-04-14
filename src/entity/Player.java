@@ -7,14 +7,16 @@ import java.awt.Label;
 public class Player extends Thread {
 
     private Command cmd;
-    private String name;
+    final private String name;
     private Map map;
-    private int ind;
+    final private int ind;
     private Vie life;
     private Points score;
-    private int x = 1, y = 1;
+    private int x, y ;
+    private int x_spawn, y_spawn;
+    final private boolean evil;
 
-    public Player(int i, String name, Map m) {
+    public Player(int i, String n, Map m,int x,int y,boolean evil) {
 
         Frame f = new Frame("Demo");
         f.setLayout(new FlowLayout());
@@ -25,11 +27,15 @@ public class Player extends Thread {
         f.setVisible(true);
 
         this.map = m;
+        this.name = n;
         this.ind = i;
         this.cmd = new Command(this);
         f.addKeyListener(this.cmd);
         this.life = new Vie(5);
         this.score = new Points();
+        this.x = this.x_spawn = x;
+        this.y = this.y_spawn = x;
+        this.evil = evil;
     }
 
     public void setCommand(Command c) {
@@ -38,18 +44,10 @@ public class Player extends Thread {
 
     public Command getCommand() {
         return this.cmd;
-    }
-
-    public void setInd(int i) {
-        this.ind = i;
-    }
+    } 
 
     public int getInd() {
         return this.ind;
-    }
-
-    public void setname(String name) {
-        this.name = name;
     }
 
     public String getname() {
@@ -92,6 +90,20 @@ public class Player extends Thread {
 
     public int getY() {
         return this.y;
+    }
+
+    public boolean isEvil(){
+        return this.evil;
+    }
+
+    public void setSpawn(int x,int y){
+        this.x_spawn = x;
+        this.y_spawn = y;
+    }
+
+    public int[] getSpawn(){
+        int [] slt =  {this.x_spawn,this.y_spawn};
+        return slt;
     }
 
     public void fall(){
@@ -142,6 +154,9 @@ public class Player extends Thread {
 
             }
             fall();
+            if (map.getCase(x, y) == 0){
+                addScore(10);
+            }
         }
     }
 
