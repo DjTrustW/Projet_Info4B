@@ -13,7 +13,7 @@ public class Player extends Thread {
     private Bot beep;
     private Map map;
     private Vie life;
-    private Points score;
+    private static Points score;
     private int x, y ;
     private int x_spawn, y_spawn;
 
@@ -192,22 +192,22 @@ public class Player extends Thread {
         switch (i) {
 
             case 1:// d
-                if (this.y < 79 && (map.getCase(x, y + 1) == 0 || map.getCase(x, y + 1) == 3 || map.getCase(x, y + 1) == 7 || map.getCase(x, y + 1) == 5))
+                if (this.y < 79 && (map.getCase(x, y + 1) == 0 || map.getCase(x, y + 1) == 3 || map.getCase(x, y + 1) == 7 || (!isEvil() && (map.getCase(x, y + 1) == 5))))
                     return true;
                 break;
 
             case 2:// q
-                if (this.y >= 0 && (map.getCase(x, y - 1) == 0 || map.getCase(x, y - 1) == 3 || map.getCase(x, y - 1) == 7 ||map.getCase(x, y - 1) == 5))
+                if (this.y >= 0 && (map.getCase(x, y - 1) == 0 || map.getCase(x, y - 1) == 3 || map.getCase(x, y - 1) == 7 || (!isEvil() && (map.getCase(x, y - 1) == 5))))
                     return true;
                 break;
 
             case 3:// s
-                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x, y + 1) == 7  || map.getCase(x + 1, y ) == 5 || (map.getCase(x - 1, y ) == 4 && !(map.getCase(x+1, y ) == 1 || map.getCase(x+1, y ) == 2))))
+                if (this.x < 19 && (map.getCase(x + 1, y) == 3 || map.getCase(x, y + 1) == 7  || (!isEvil() && (map.getCase(x + 1, y ) == 5)) || (map.getCase(x - 1, y ) == 4 && !(map.getCase(x+1, y ) == 1 || map.getCase(x+1, y ) == 2))))
                     return true;
                 break;
 
             case 4:// z
-                if (this.x >= 0 && (map.getCase(x - 1, y) == 3 || map.getCase(x, y + 1) == 7  || map.getCase(x -1, y ) == 5))
+                if (this.x >= 0 && (map.getCase(x - 1, y) == 3 || map.getCase(x, y + 1) == 7  || (!isEvil() && (map.getCase(x -1, y ) == 5))))
                     return true;
                 break;
         }
@@ -246,6 +246,11 @@ public class Player extends Thread {
     }
 
     public void run(){
-
+        while(this.life.getVieJoueur() > 0 || (this.score.getPointsJoueur() == 100 && this.map.getCase(this.x,this.y) == 8)){
+            try {
+                this.sleep(50);
+            } catch (Exception e) {
+            }
+        }
     }
 }

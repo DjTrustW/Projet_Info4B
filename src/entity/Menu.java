@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Menu {
 
+    private String pseudo;
+
     public Menu() {
     }
 
@@ -442,7 +444,10 @@ public class Menu {
                         case 1:
                             System.out.println("niveau dispo de 1 a 2");
                             int tmp = sc.nextInt();
-                            Game g1 = new Game(tmp);
+                            System.out.print("Pseudo :");
+                            this. pseudo = sc.next();
+                            System.out.println();
+                            Game g1 = new Game(tmp,this.pseudo);
                             g1.start();
                             try {
                                 g1.join();
@@ -451,7 +456,10 @@ public class Menu {
                             break;
 
                         case 2:
-                            Game g2 = new Game((int) (Math.random() * 2) + 1);
+                            System.out.print("Pseudo :");
+                            this. pseudo = sc.next();
+                            System.out.println();
+                            Game g2 = new Game((int) (Math.random() * 2) + 1,this.pseudo);
                             g2.start();
                             try {
                                 g2.join();
@@ -472,10 +480,13 @@ public class Menu {
                     switch (result) {
 
                         case 1:
+                            System.out.print("Pseudo :");
+                            this. pseudo = sc.next();
+                            System.out.println();
                             /// ajout des socket a faire
                             System.out.println("niveau dispo de 1 a 2");
                             int tmp = sc.nextInt();
-                            Game g3 = new Game(tmp);
+                            Game g3 = new Game(tmp,this.pseudo);
                             g3.start();
                             try {
                                 g3.join();
@@ -484,8 +495,11 @@ public class Menu {
                             break;
 
                         case 2:
+                            System.out.print("Pseudo :");
+                            this. pseudo = sc.next();
+                            System.out.println();
                             /// ajout des socket a faire
-                            Game g4 = new Game((int) (Math.random() * 2) + 1);
+                            Game g4 = new Game((int) (Math.random() * 2) + 1,this.pseudo);
                             g4.start();
                             try {
                                 g4.join();

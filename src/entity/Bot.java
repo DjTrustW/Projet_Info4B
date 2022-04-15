@@ -25,5 +25,4 @@ public class Bot extends Thread {
             test = ((int)(Math.random() * 10) + 1);
         }
     }
-    
 }

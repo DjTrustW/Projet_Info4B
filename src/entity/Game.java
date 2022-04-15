@@ -12,7 +12,7 @@ public class Game extends Thread {
     private ArrayList<Player> tabH;
     private ArrayList<Player> tabE;
 
-    public Game(int i) {
+    public Game(int i,String name) {
 
         this.f = new Function();
         this.aff = new Affichage(this,0);
@@ -22,7 +22,7 @@ public class Game extends Thread {
         int [][][] spawn = lvl.getSpawn();
         this.tabH = new ArrayList<Player>();
         this.tabE = new ArrayList<Player>();
-        this.tabH.add(new Player(ind, "UwU", this.currentMap, spawn[0][0][0], spawn[0][0][1], false,false));
+        this.tabH.add(new Player(ind, name, this.currentMap, spawn[0][0][0], spawn[0][0][1], false,false));
         this.ind++;
 
         for (int nb =1 ; i<spawn[2].length;i++){
@@ -52,6 +52,9 @@ public class Game extends Thread {
 
         this.currentMap.setlevel(this.lvl);
         this.currentMap.addToMapCoin();
+        if(this.tabH.get(0).getScore().getPointsJoueur() == 100){
+            
+        }
 
         for(int i = 0;i<this.tabE.size();i++){
             this.currentMap.setCase(this.tabE.get(i).getX(), this.tabE.get(i).getY(),5);
@@ -79,6 +82,7 @@ public class Game extends Thread {
             } catch (Exception e) {
             }
         }
+        aff.lock = false;
 
     }
 

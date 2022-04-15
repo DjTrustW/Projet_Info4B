@@ -6,9 +6,11 @@ class Vie{
     //methode affiche() pour afficher les coeurs sous le niveau joué
 
     private int vieJoueur;
+    private final int vie_max;
 
     public Vie(int i){
         this.vieJoueur = i;
+        this.vie_max = i;
     }
 
     public int getVieJoueur(){return this.vieJoueur;}
@@ -19,13 +21,17 @@ class Vie{
         String laVieDispo = "Vies : ";
         for(int i=0;i<getVieJoueur();i++)
         {
-            laVieDispo += "<3 ";
+            laVieDispo += " <3 ";
+        }
+
+        for(int i=0;i<(this.vie_max - this.vieJoueur);i++)
+        {
+            laVieDispo += "</3 ";
         }
         return laVieDispo;
     }
 
     public void toucheEnnemi(){
         vieJoueur = vieJoueur-1;
-        affiche();
     }
 }

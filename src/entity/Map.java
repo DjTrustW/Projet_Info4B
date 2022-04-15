@@ -126,7 +126,7 @@ public class Map {
         for(int i=0;i<20;i++){
             for(int j =0 ;j<80;j++){
                 
-                if(getCase(i, j) == 5 || getCase(i, j) == 6 || getCase(i, j) == 7){
+                if(getCase(i, j) == 5 || getCase(i, j) == 6 || getCase(i, j) == 7 || getCase(i, j) == 8 ){
                     setCase(i, j, 0);
                 }
             }
