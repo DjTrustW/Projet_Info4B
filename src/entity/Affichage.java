@@ -5,9 +5,11 @@ class Affichage extends Thread {
 
     private Game partie; /// lien a la partie 
     public boolean lock; /// permet de savoir si l 'affiche dois afficher'
+    public int ind;
 
-    public Affichage(Game g){ //initialise
+    public Affichage(Game g,int i){ //initialise
         this.partie = g;
+        this.ind = i;
         this.lock = true;
     }
 

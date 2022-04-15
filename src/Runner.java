@@ -9,7 +9,6 @@ public class Runner {
         try {
             m.MenuManager();
         } catch (Exception e) {
-            //TODO: handle exception
         }
 
 

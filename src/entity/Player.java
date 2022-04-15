@@ -7,16 +7,17 @@ import java.awt.Label;
 
 public class Player extends Thread {
 
-    final private int ind;
-    private String name;
-    final private boolean evil;
-    private Command cmd;
-    private Bot beep;
-    private Map map;
-    private Vie life;
-    private static Points score;
-    private int x, y ;
-    private int x_spawn, y_spawn;
+    final private int ind; /// identifiant
+    private String name; ///pseudo
+    final private boolean evil; /// mechant ou pas 
+    private Command cmd; /// keylistner associer
+    private Bot beep; /// son deplacement aleatoire si c est un bot 
+    private Map map; //la map
+    private Vie life; // ses points de vie 
+    private static Points score; ///son score
+    private int x, y ; // sa position 
+    private int x_spawn, y_spawn; // son spawn
+    private boolean runn = true; /// permet de kill qd la partie et terminer
 
     public Player(int i, String n, Map m,int x,int y,boolean evil,boolean IA) {
 
@@ -29,7 +30,7 @@ public class Player extends Thread {
         this.y = this.y_spawn = y;
         this.evil = evil;
 
-        if(!IA){ /// creer un frame pour le keylistener
+        if(!IA){ /// creer un frame pour le keylistener si c est un vrai joueur
             Frame f = new Frame("Projet_Info4B");
             f.setLayout(new FlowLayout());
             f.setSize(100, 100);
@@ -42,7 +43,7 @@ public class Player extends Thread {
         }
 
         else{
-            this.beep = new Bot(this);
+            this.beep = new Bot(this); /// sinon creer un bot
             this.beep.start();
         }
 
@@ -126,6 +127,10 @@ public class Player extends Thread {
     public int[] getSpawn(){
         int [] slt =  {this.x_spawn,this.y_spawn};
         return slt;
+    }
+
+    public void stopped(){
+        this.runn = false;
     }
 
     public synchronized void fall(){
@@ -259,7 +264,7 @@ public class Player extends Thread {
     }
 
     public void run(){
-        while(this.life.getVieJoueur() > 0 || (this.score.getPointsJoueur() == 100 && this.map.getCase(this.x,this.y) == 8)){
+        while(this.runn &&( this.life.getVieJoueur() > 0 || (this.score.getPointsJoueur() == 100 && this.map.getCase(this.x,this.y) == 8))){
             try {
                 this.sleep(50);
             } catch (Exception e) {

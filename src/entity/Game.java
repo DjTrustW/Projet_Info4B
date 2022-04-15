@@ -28,7 +28,7 @@ public class Game extends Thread {
         this.ind_incr++;
 
         for (int nb =1 ; i<spawn[2].length;i++){
-            this.tabE.add(new Player(this.ind_incr, ("mechant_"+this.ind_incr), this.currentMap, spawn[1][nb][0], spawn[1][nb][1], true,false));
+            this.tabE.add(new Player(this.ind_incr, ("mechant_"+this.ind_incr), this.currentMap, spawn[1][nb][0], spawn[1][nb][1], true,true));///les ennemis ce deplace
             this.ind_incr++;
         }
         
@@ -96,10 +96,10 @@ public class Game extends Thread {
 
         aff.start();
         for(int i = 0;i<this.tabH.size();i++){
-            this.tabH.get(i).start();
+            this.tabH.get(i).start();///lance tout les joueurs
         }
         for(int i = 0;i<this.tabE.size();i++){
-            this.tabE.get(i).start();
+            this.tabE.get(i).start();///lance tout les enemies
         }
 
         for(int i = 0;i<this.tabH.size();i++){
@@ -109,7 +109,11 @@ public class Game extends Thread {
             }
         }
         aff.lock = false;
-
+        for(int i = 0;i<this.tabH.size();i++){
+            this.tabH.get(i).stopped();///arrrete tout les joueurs(thread)
+        }
+        for(int i = 0;i<this.tabE.size();i++){
+            this.tabE.get(i).stopped();///arrete tout les enemies(thread)
+        }
     }
-
 }
