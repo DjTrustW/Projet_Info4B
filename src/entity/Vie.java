@@ -8,25 +8,25 @@ class Vie{
     private int vieJoueur;
     private final int vie_max;
 
-    public Vie(int i){
+    public Vie(int i){ /// init 
         this.vieJoueur = i;
         this.vie_max = i;
     }
 
-    public int getVieJoueur(){return this.vieJoueur;}
-    public void setVieJoueur(int nbVie){this.vieJoueur=nbVie;}
+    public int getVieJoueur(){return this.vieJoueur;} /// retourne les pv
+    public void setVieJoueur(int nbVie){this.vieJoueur=nbVie;} /// permet de set la vie 
 
 
-    public String affiche(){
+    public String affiche(){///affiche en fonction des point de vie restant :
         String laVieDispo = "Vies : ";
         for(int i=0;i<getVieJoueur();i++)
         {
-            laVieDispo += " <3 ";
+            laVieDispo += " <3 ";   /// coeur entier 
         }
 
         for(int i=0;i<(this.vie_max - this.vieJoueur);i++)
         {
-            laVieDispo += "</3 ";
+            laVieDispo += "</3 ";   /// coeur briser 
         }
         return laVieDispo;
     }

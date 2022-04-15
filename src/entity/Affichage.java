@@ -1,32 +1,30 @@
 package entity;
 import java.io.*;
 
-
 class Affichage extends Thread {
 
-    private Game partie;
-    private int ind;
-    public boolean lock;
+    private Game partie; /// lien a la partie 
+    public boolean lock; /// permet de savoir si l 'affiche dois afficher'
 
-    public Affichage(Game g,int i){
+    public Affichage(Game g){ //initialise
         this.partie = g;
         this.lock = true;
-        this.ind = i;
     }
 
-    public void run() {
+    @Override
+    public void run() { /// run 
         
         while(lock){
             try{
                 System.out.println(this.show());
                 this.sleep(50);
             } 
-            catch (Exception e){e.printStackTrace();}
+            catch (Exception e){}
         }
     }
 
 
-    public String show()throws IOException{
+    public String show(){ ///permet d afficher la map puis la vie puis le score
         
         String laMap = "";
         this.partie.updateMap();
@@ -34,7 +32,5 @@ class Affichage extends Thread {
         laMap += this.partie.getPlayer(this.ind).getLife().affiche()+" "+this.partie.getPlayer(this.ind).getScore().affiche();
         return laMap;
     }
-
-    
 
 }

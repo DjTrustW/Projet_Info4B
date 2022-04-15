@@ -1,5 +1,6 @@
 package entity;
 
+import reseau.*;
 import java.util.Scanner;
 
 public class Menu {
@@ -9,7 +10,7 @@ public class Menu {
     public Menu() {
     }
 
-    private String getMainMenu() { /// 1
+    private String getMainMenu() { /// choix 1
 
         String menu = "";
 
@@ -39,7 +40,7 @@ public class Menu {
         return menu;
     }
 
-    private String getGameMenu() { /// 2
+    private String getGameMenu() { /// choix 2
 
         String menu = "";
 
@@ -69,7 +70,7 @@ public class Menu {
         return menu;
     }
 
-    private String getVersusMenu() { /// 3
+    private String getVersusMenu() { /// choix 3
 
         String menu = "";
 
@@ -99,7 +100,7 @@ public class Menu {
         return menu;
     }
 
-    private String getServeurMenu() { /// 4
+    private String getServeurMenu() { /// choix 4
 
         String menu = "";
         menu += "||================================================================================||\n";
@@ -126,7 +127,7 @@ public class Menu {
         return menu;
     }
 
-    private String waitMenuClient() { /// 5
+    private String getwaitMenuClient() { /// choix 5
 
         String menu = "";
         menu += "||================================================================================||\n";
@@ -155,7 +156,7 @@ public class Menu {
         return menu;
     }
 
-    private String getReseauMenu() { /// 6
+    private String getReseauMenu() { /// choix 6
 
         String menu = "";
         menu += "||================================================================================||\n";
@@ -184,7 +185,7 @@ public class Menu {
         return menu;
     }
 
-    private String getMultiModeMenu() { /// 7
+    private String getMultiModeMenu() { /// choix 7
 
         String menu = "";
 
@@ -214,7 +215,7 @@ public class Menu {
         return menu;
     }
 
-    private String getLevelSelectorMenu() { /// 8
+    private String getLevelSelectorMenu() { /// choix 8
 
         String menu = "";
 
@@ -244,7 +245,7 @@ public class Menu {
         return menu;
     }
 
-    private String getLevelMultiSelectorMenu() { /// 9
+    private String getLevelMultiSelectorMenu() { /// choix 9
 
         String menu = "";
 
@@ -274,7 +275,7 @@ public class Menu {
         return menu;
     }
 
-    private String getClientMenu() { /// 10
+    private String getClientMenu() { /// choix 10
 
         String menu = "";
 
@@ -286,12 +287,12 @@ public class Menu {
         menu += "||                                                                                ||\n";
         menu += "||                                                                                ||\n";
         menu += "||                                    1. Valider                                  ||\n";
-        menu += "||                                2. Autre serveur                                ||\n";
         menu += "||                                                                                ||\n";
         menu += "||                                                                                ||\n";
         menu += "||                                                                                ||\n";
         menu += "||                                                                                ||\n";
-        menu += "||                                    3.Retour                                    ||\n";
+        menu += "||                                                                                ||\n";
+        menu += "||                                    2.Retour                                    ||\n";
         menu += "||                                                                                ||\n";
         menu += "||                                                                                ||\n";
         menu += "||                                                                                ||\n";
@@ -304,241 +305,245 @@ public class Menu {
         return menu;
     }
 
-    public void MenuManager() {
+    public void MenuManager() throws Exception{  /// arboresence complique dans le sens ou ça va plutot essayer en lancant le jeu
+        
+            int choix = 1;
+            int result = 0;
+            boolean lock = true;
+            Serveur s = new Serveur();
+            Client c ;
+            Scanner sc = new Scanner(System.in);
 
-        int choix = 1;
-        int result = 0;
-        boolean lock = true;
-        Scanner sc = new Scanner(System.in);
+            while (lock) {
 
-        while (lock) {
+                result = 0;
+                switch (choix) {
 
-            result = 0;
-            switch (choix) {
+                    case 1:
 
-                case 1:
+                        System.out.println(getMainMenu());
+                        result = sc.nextInt();
 
-                    System.out.println(getMainMenu());
-                    result = sc.nextInt();
+                        switch (result) {
 
-                    switch (result) {
+                            case 1:
+                                choix = 2;
+                                break;
 
-                        case 1:
-                            choix = 2;
-                            break;
+                            case 2:
+                                lock = false;
+                                break;
+                        }
+                        break;
 
-                        case 2:
-                            lock = false;
-                            break;
+                    case 2:
+
+                        System.out.println(getGameMenu());
+                        result = sc.nextInt();
+
+                        switch (result) {
+
+                            case 1:
+                                choix = 8;
+                                break;
+
+                            case 2:
+                                choix = 6;
+                                break;
+
+                            case 3:
+                                choix = 1;
+                                break;
+                        }
+                        break;
+
+                    case 3:
+
+                        System.out.println(getVersusMenu());
+                        result = sc.nextInt();
+
+                        switch (result) {
+
+                            case 1:
+                                choix = 9;
+                                break;
+
+                            case 2:
+                                // choisi parmi les socket lequel sera hero
+                                break;
+
+                            case 3:
+                                choix = 7;
+                                break;
+                        }
+                        break;
+
+                    case 4:
+
+                        System.out.println(getServeurMenu());
+                        result = sc.nextInt();
+                        s.start();
+
+                        switch (result) {
+
+                            case 1:
+                                s.stoped();
+                                break;
+
+                            case 2:
+                                choix = 6;
+                                break;
+                        }
+                        break;
+
+                    case 6:
+                        System.out.println(getReseauMenu());
+                        result = sc.nextInt();
+
+                        switch (result) {
+
+                            case 1:
+                                choix = 4;
+                                break;
+
+                            case 2:
+                                choix = 10;
+                                break;
+
+                            case 3:
+                                choix = 2;
+                                break;
+                        }
+
+                        break;
+
+                    case 7:
+
+                        System.out.println(getMultiModeMenu());
+                        result = sc.nextInt();
+                        switch (result) {
+
+                            case 1:
+                                choix = 9;
+                                break;
+
+                            case 2:
+                                choix = 3;
+                                break;
+
+                            case 3:
+                                choix = 6;
+                                break;
+                        }
+
+                        break;
+
+                    case 8:
+                        System.out.println(getLevelSelectorMenu());
+                        result = sc.nextInt();
+
+                        switch (result) {
+
+                            case 1:
+                                System.out.println("niveau dispo de 1 a 2");
+                                int tmp = sc.nextInt();
+                                System.out.print("Pseudo :");
+                                this.pseudo = sc.next();
+                                System.out.println();
+                                Game g1 = new Game(tmp, this.pseudo);
+                                g1.start();
+                                try {
+                                    g1.join();
+                                } catch (Exception e) {
+                                }
+                                break;
+
+                            case 2:
+                                System.out.print("Pseudo :");
+                                this.pseudo = sc.next();
+                                System.out.println();
+                                Game g2 = new Game((int) (Math.random() * 2) + 1, this.pseudo);
+                                g2.start();
+                                try {
+                                    g2.join();
+                                } catch (Exception e) {
+                                }
+                                break;
+
+                            case 3:
+                                choix = 2;
+                                break;
+                        }
+
+                        break;
+
+                    case 9:
+                        System.out.println(getLevelSelectorMenu());
+                        result = sc.nextInt();
+                        switch (result) {
+
+                            case 1:
+                                System.out.print("Pseudo :");
+                                this.pseudo = sc.next();
+                                System.out.println();
+                                System.out.println("niveau dispo de 1 a 2");
+                                int tmp = sc.nextInt();
+                                Game g3 = new Game(tmp, this.pseudo, 0, s);
+                                g3.start();
+                                try {
+                                    g3.join();
+                                } catch (Exception e) {
+                                }
+                                break;
+
+                            case 2:
+                                System.out.print("Pseudo :");
+                                this.pseudo = sc.next();
+                                System.out.println();
+                                Game g4 = new Game((int) (Math.random() * 2) + 1, this.pseudo, 1, s);
+                                g4.start();
+                                try {
+                                    g4.join();
+                                } catch (Exception e) {
+                                }
+                                break;
+
+                            case 3:
+                                choix = 7;
+                                break;
+                        }
+
+                        break;
+
+                    case 10:
+                        System.out.println(getClientMenu());
+                        result = sc.nextInt();
+                        switch (result) {
+
+                            case 1:
+                                getwaitMenuClient();
+                                System.out.print("Pseudo :");
+                                this.pseudo = sc.next();
+                                System.out.println();
+                                c = new Client(pseudo);
+                                c.start();
+                                try {
+                                    c.join();
+                                } catch (Exception e) {}
+                                break;
+
+                            case 2:
+                                choix = 6;
+                                break;
+                        }
+
+                        break;
                     }
-                    break;
 
-                case 2:
+                }
 
-                    System.out.println(getGameMenu());
-                    result = sc.nextInt();
-
-                    switch (result) {
-
-                        case 1:
-                            choix = 8;
-                            break;
-
-                        case 2:
-                            choix = 6;
-                            break;
-
-                        case 3:
-                            choix = 1;
-                            break;
-                    }
-                    break;
-
-                case 3:
-
-                    System.out.println(getVersusMenu());
-                    result = sc.nextInt();
-
-                    switch (result) {
-
-                        case 1:
-                            choix = 9;
-                            break;
-
-                        case 2:
-                            // choisi parmi les socket lequel sera hero
-                            break;
-
-                        case 3:
-                            choix = 7;
-                            break;
-                    }
-                    break;
-
-                case 4:
-
-                    System.out.println(getServeurMenu());
-                    result = sc.nextInt();
-
-                    switch (result) {
-
-                        case 1:
-                            /// creer serveur
-                            /// lance serveur
-                            break;
-
-                        case 2:
-                            choix = 6;
-                            break;
-                    }
-                    break;
-
-                case 6:
-                    System.out.println(getReseauMenu());
-                    result = sc.nextInt();
-
-                    switch (result) {
-
-                        case 1:
-                            choix = 4;
-                            break;
-
-                        case 2:
-                            choix = 10;
-                            break;
-
-                        case 3:
-                            choix = 2;
-                            break;
-                    }
-
-                    break;
-
-                case 7:
-
-                    System.out.println(getMultiModeMenu());
-                    result = sc.nextInt();
-                    switch (result) {
-
-                        case 1:
-                            choix = 9;
-                            break;
-
-                        case 2:
-                            choix = 3;
-                            break;
-
-                        case 3:
-                            choix = 6;
-                            break;
-                    }
-
-                    break;
-
-                case 8:
-                    System.out.println(getLevelSelectorMenu());
-                    result = sc.nextInt();
-
-                    switch (result) {
-
-                        case 1:
-                            System.out.println("niveau dispo de 1 a 2");
-                            int tmp = sc.nextInt();
-                            System.out.print("Pseudo :");
-                            this. pseudo = sc.next();
-                            System.out.println();
-                            Game g1 = new Game(tmp,this.pseudo);
-                            g1.start();
-                            try {
-                                g1.join();
-                            } catch (Exception e) {
-                            }
-                            break;
-
-                        case 2:
-                            System.out.print("Pseudo :");
-                            this. pseudo = sc.next();
-                            System.out.println();
-                            Game g2 = new Game((int) (Math.random() * 2) + 1,this.pseudo);
-                            g2.start();
-                            try {
-                                g2.join();
-                            } catch (Exception e) {
-                            }
-                            break;
-
-                        case 3:
-                            choix = 2;
-                            break;
-                    }
-
-                    break;
-
-                case 9:
-                    System.out.println(getLevelSelectorMenu());
-                    result = sc.nextInt();
-                    switch (result) {
-
-                        case 1:
-                            System.out.print("Pseudo :");
-                            this. pseudo = sc.next();
-                            System.out.println();
-                            /// ajout des socket a faire
-                            System.out.println("niveau dispo de 1 a 2");
-                            int tmp = sc.nextInt();
-                            Game g3 = new Game(tmp,this.pseudo);
-                            g3.start();
-                            try {
-                                g3.join();
-                            } catch (Exception e) {
-                            }
-                            break;
-
-                        case 2:
-                            System.out.print("Pseudo :");
-                            this. pseudo = sc.next();
-                            System.out.println();
-                            /// ajout des socket a faire
-                            Game g4 = new Game((int) (Math.random() * 2) + 1,this.pseudo);
-                            g4.start();
-                            try {
-                                g4.join();
-                            } catch (Exception e) {
-                            }
-                            break;
-
-                        case 3:
-                            choix = 7;
-                            break;
-                    }
-
-                    break;
-
-                case 10:
-                    System.out.println(getClientMenu());
-                    result = sc.nextInt();
-                    /// a voir
-                    switch (result) {
-
-                        case 1:
-                            choix = 5;
-                            break;
-
-                        case 2:
-                            choix = 10;
-                            break;
-
-                        case 3:
-                            choix = 6;
-                            break;
-                    }
-
-                    break;
-            }
+                sc.close();
 
         }
-
-        sc.close();
-    }
 
 }

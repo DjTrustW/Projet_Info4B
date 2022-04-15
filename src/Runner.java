@@ -1,11 +1,17 @@
 import entity.*;
+import reseau.*;
 
 public class Runner {
 
     public static void main(String[] args){
         
         Menu m = new Menu();
-        m.MenuManager();
+        try {
+            m.MenuManager();
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+
 
     }
 }

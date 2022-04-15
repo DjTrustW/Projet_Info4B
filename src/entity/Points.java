@@ -15,25 +15,25 @@ class Points {
 
     private int pointsJoueur;
 
-    public Points() {
+    public Points() {  /// init 
         this.pointsJoueur = 0;
     }
 
-    public int getPointsJoueur() {
+    public int getPointsJoueur() { /// retourne le score
         return this.pointsJoueur;
     }
 
-    public void setPointsJoueur(int i){
+    public void setPointsJoueur(int i){ /// set les score
         this.pointsJoueur = i;
         
     }
 
-    public void addPointsJoueur(int i){
+    public void addPointsJoueur(int i){ /// ajoute des score 
         setPointsJoueur(getPointsJoueur()+i);
     }
 
 
-    public String affiche() {
+    public String affiche() { /// permet l'affichage
         String nbPoints = "Points : " + getPointsJoueur() + "\n";
         return nbPoints;
     }

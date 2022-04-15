@@ -1,11 +1,11 @@
 package entity;
 import java.io.*;
 
-public class Function {
+public class Function { // class de fonction utile
 
-    public Function(){}
+    public Function(){}  //init
 
-    public Map ReadLevel(String path){
+    public Map ReadLevel(String path){ /// permet de transformer 
 
         try{
             File file = new File(path);
@@ -18,7 +18,7 @@ public class Function {
             while ((ligne=textBuffer.readLine()) != null)
             {
                 for(int i=0;i<ligne.length();i++){
-                    m[x][i]= Integer.parseInt(String.valueOf(ligne.charAt(i)));
+                    m[x][i]= Integer.parseInt(String.valueOf(ligne.charAt(i))); /// tansforme les strings en entiers pour les stocket dans la map
                 }
                 x++;
             }
@@ -33,22 +33,5 @@ public class Function {
         }
 
     }
-
-    /*public Level Roulette(){
-
-        int randomJ = (int)(Math.random()*9);
-
-        for(int i=0;i<=randomJ;i++)
-        {
-            //faire défiler un à un les usertag dans uu jusqu'à celui sélectionné 
-        }
-
-        Level MultiLevel = null ;
-        //usertag.getLevelChoisi()
-
-        return MultiLevel;
-
-    }*/
-
 
 }

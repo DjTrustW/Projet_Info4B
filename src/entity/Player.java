@@ -1,5 +1,6 @@
 package entity;
-
+import java.io.*;
+import java.net.*;
 import java.awt.FlowLayout;
 import java.awt.Frame;
 import java.awt.Label;
@@ -7,7 +8,7 @@ import java.awt.Label;
 public class Player extends Thread {
 
     final private int ind;
-    final private String name;
+    private String name;
     final private boolean evil;
     private Command cmd;
     private Bot beep;
@@ -28,7 +29,7 @@ public class Player extends Thread {
         this.y = this.y_spawn = y;
         this.evil = evil;
 
-        if(!IA){
+        if(!IA){ /// creer un frame pour le keylistener
             Frame f = new Frame("Projet_Info4B");
             f.setLayout(new FlowLayout());
             f.setSize(100, 100);
@@ -44,6 +45,18 @@ public class Player extends Thread {
             this.beep = new Bot(this);
             this.beep.start();
         }
+
+    }
+
+    public Player(int i, PrintWriter p, Map m,int x,int y,boolean evil,boolean IA) {
+
+        this.map = m;
+        this.ind = i;
+        this.life = new Vie(5);
+        this.score = new Points();
+        this.x = this.x_spawn = x;
+        this.y = this.y_spawn = y;
+        this.evil = evil;
 
     }
 

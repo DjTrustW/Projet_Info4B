@@ -8,7 +8,7 @@ public class Map {
     private int[][] CoinSpawn;
     private Map link;
 
-    public Map(int tab[][]){
+    public Map(int tab[][]){ /// init avec tab 
         this.map = tab;
         this.HeroSpawn = getHeroSpawn();
         this.EvilSpawn = getEvilSpawn();
@@ -16,7 +16,7 @@ public class Map {
         clearmap();
     }
 
-    public Map(Map m){
+    public Map(Map m){ ///init avec une map
         this.map = m.getLevel();
         this.HeroSpawn = getHeroSpawn();
         this.EvilSpawn = getEvilSpawn();
@@ -24,27 +24,27 @@ public class Map {
         clearmap();
     }
 
-    public int[][] getLevel(){
+    public int[][] getLevel(){ /// retourne le tabeau
         return this.map;
     }
 
-    public void setlevel(Map m){
+    public void setlevel(Map m){ ///  permet de recopier le lvl
         for(int i = 0; i < m.getLevel().length; i++)
         this.map[i] =  m.getLevel()[i].clone();
     }
 
-    public void setCase(int x, int y,int value){
+    public void setCase(int x, int y,int value){/// permet de set une case
         this.map[x][y] = value;
     }
 
-    public int getCase(int x ,int y){
+    public int getCase(int x ,int y){ /// permet d avoir la case x y 
         return this.map[x][y];
     }
 
-    private int[][] getHeroSpawn(){
+    private int[][] getHeroSpawn(){ /// retourne les position posible des spawns hero 
 
         int nb = 0;
-        for(int i=0;i<20;i++){
+        for(int i=0;i<20;i++){ /// verifie combien de spawn pour la taille du tableau
             for(int j =0 ;j<80;j++){
                 
                 if(getCase(i, j) == 6){
@@ -55,7 +55,7 @@ public class Map {
 
         int [][] slt = new int [nb][2];
         nb =0;
-        for(int i=0;i<20;i++){
+        for(int i=0;i<20;i++){ /// range les position dans le tableau
             for(int j = 0 ;j<80;j++){
                 
                 if(getCase(i, j) == 6){
@@ -68,10 +68,10 @@ public class Map {
         return slt;
     }
 
-    private int[][] getEvilSpawn(){
+    private int[][] getEvilSpawn(){ /// retourne les position posible des spawns enemis
 
         int nb = 0;
-        for(int i=0;i<20;i++){
+        for(int i=0;i<20;i++){/// verifie combien de spawn pour la taille du tableau
             for(int j =0 ;j<80;j++){
                 
                 if(getCase(i, j) == 5){
@@ -82,7 +82,7 @@ public class Map {
 
         int [][] slt = new int [nb][2];
         nb =0;
-        for(int i=0;i<20;i++){
+        for(int i=0;i<20;i++){/// range les position dans le tableau
             for(int j =0 ;j<80;j++){
                 
                 if(getCase(i, j) == 5){
@@ -95,10 +95,10 @@ public class Map {
         return slt;
     }
 
-    private int[][] getCoinSpawn(){
+    private int[][] getCoinSpawn(){/// retourne les position posible des spawns des "coins"
 
         int nb = 0;
-        for(int i=0;i<20;i++){
+        for(int i=0;i<20;i++){/// verifie combien de spawn pour la taille du tableau
             for(int j =0 ;j<80;j++){
                 
                 if(getCase(i, j) == 7){
@@ -109,7 +109,7 @@ public class Map {
 
         int [][] slt = new int [nb][2];
         nb =0;
-        for(int i=0;i<20;i++){
+        for(int i=0;i<20;i++){/// range les position dans le tableau
             for(int j =0 ;j<80;j++){
                 
                 if(getCase(i, j) == 7){
@@ -122,23 +122,23 @@ public class Map {
         return slt;
     }
 
-    private void clearmap(){
+    private void clearmap(){ /// permet de retirer tout le supperflue
         for(int i=0;i<20;i++){
             for(int j =0 ;j<80;j++){
                 
-                if(getCase(i, j) == 5 || getCase(i, j) == 6 || getCase(i, j) == 7 || getCase(i, j) == 8 ){
+                if(getCase(i, j) == 5 || getCase(i, j) == 6 || getCase(i, j) == 7 ){
                     setCase(i, j, 0);
                 }
             }
         }
     }
 
-    public int[][][] getSpawn(){
+    public int[][][] getSpawn(){ /// permet d'avoir un tableau des trois tableau de spawn
         int [][][] slt =  {this.HeroSpawn,this.EvilSpawn,this.CoinSpawn};
         return slt;
     }
 
-    public void addToMapCoin(){
+    public void addToMapCoin(){ /// permet d'afficher les coins restant
         for (int i =0 ; i<this.getLink().getSpawn()[2].length;i++){
             if(this.getLink().getSpawn()[2][i][0] >0 && this.getLink().getSpawn()[2][i][1] >0){
                 setCase(this.getLink().getSpawn()[2][i][0], this.getLink().getSpawn()[2][i][1], 7);
@@ -146,10 +146,7 @@ public class Map {
         }
     }
 
-    public void delToMapCoin(int x,int y){
-
-
-
+    public void delToMapCoin(int x,int y){///permet de supprimer un coin pour qu'il ne sois plus afficher
         for (int i =0 ; i<this.getLink().getSpawn()[2].length;i++){
 
             if( this.getLink().getSpawn()[2][i][0] == x  &&  this.getLink().getSpawn()[2][i][1] == y){
@@ -159,15 +156,15 @@ public class Map {
         }
     }
 
-    public void setLink(Map m){
+    public void setLink(Map m){///lien a la map d origine 
         this.link = m;
     }
 
-    public Map getLink(){
+    public Map getLink(){ /// retourne la map d origine 
         return this.link;
     }
 
-    public void show(){
+    public void show(){ /// affichage rudimentare ou la map est afficher en chiifre
         for(int i=0;i<20;i++){
             for(int j =0 ;j<80;j++){
                 System.out.print(this.map[i][j]);
@@ -177,7 +174,7 @@ public class Map {
         System.out.println("------------------");
     }
 
-    public String affiche(){
+    public String affiche(){ /// affichage de la map en fonction des block (attention les x sont inverse)
 
         String laMap="";
         laMap += "||================================================================================||\n";

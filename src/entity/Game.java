@@ -1,9 +1,10 @@
 package entity;
 import java.util.*;
+import reseau.*;
 
 public class Game extends Thread {
 
-    private int ind = 0;
+    private int ind_incr = 0;
     private Player p;
     private Affichage aff;
     private Map lvl;
@@ -11,8 +12,9 @@ public class Game extends Thread {
     private Function f;
     private ArrayList<Player> tabH;
     private ArrayList<Player> tabE;
+    private Serveur s;
 
-    public Game(int i,String name) {
+    public Game(int i,String name) {///Mode solo
 
         this.f = new Function();
         this.aff = new Affichage(this,0);
@@ -22,35 +24,59 @@ public class Game extends Thread {
         int [][][] spawn = lvl.getSpawn();
         this.tabH = new ArrayList<Player>();
         this.tabE = new ArrayList<Player>();
-        this.tabH.add(new Player(ind, name, this.currentMap, spawn[0][0][0], spawn[0][0][1], false,false));
-        this.ind++;
+        this.tabH.add(new Player(ind_incr, name, this.currentMap, spawn[0][0][0], spawn[0][0][1], false,false));
+        this.ind_incr++;
 
         for (int nb =1 ; i<spawn[2].length;i++){
-            this.tabE.add(new Player(this.ind, ("mechant_"+this.ind), this.currentMap, spawn[1][nb][0], spawn[1][nb][1], true,true));
-            this.ind++;
+            this.tabE.add(new Player(this.ind_incr, ("mechant_"+this.ind_incr), this.currentMap, spawn[1][nb][0], spawn[1][nb][1], true,false));
+            this.ind_incr++;
         }
         
     }
 
-    public Map getMap(){
+    public Game (int i,String name ,int mode ,Serveur s){///Mode Multi
+
+        this.f = new Function();
+        this.aff = new Affichage(this,0);
+        this.lvl = f.ReadLevel("./level/level"+i+".txt");
+        this.currentMap = f.ReadLevel("./level/level"+i+".txt");
+        this.currentMap.setLink(this.lvl);
+        int [][][] spawn = lvl.getSpawn();
+        this.tabH = new ArrayList<Player>();
+        this.tabE = new ArrayList<Player>();
+
+        switch (((int)(Math.random()*4)+1)) {
+
+            case 1:
+                this.tabH.add(new Player(ind_incr, this.s.getPrintWriter()[i], this.currentMap, spawn[0][0][0], spawn[0][0][1], true,false));
+                break;
+
+            case 2:
+                this.tabH.add(new Player(ind_incr, this.s.getPrintWriter()[i], this.currentMap, spawn[0][0][0], spawn[0][0][1], false,false));
+                break;
+        }
+
+    }
+
+    public Map getMap(){ // retourne la map d origine
         return this.lvl;
     }
 
-    public Map getcurrentMap(){
+    public Map getcurrentMap(){ // retourne la map (courante)
         return this.currentMap;
     }
 
-    public Player getPlayer(int i){
+    public Player getPlayer(int i){ // retourne le joueur i
         return this.tabH.get(i);
     }
 
-    public Player getEnemie(int i){
+    public Player getEnemie(int i){// retour l enemi i
         return this.tabE.get(i);
     }
 
-    public void updateMap(){
+    public void updateMap(){ // permet de netoyer la map 
 
-        this.currentMap.setlevel(this.lvl);
+        this.currentMap.setlevel(this.lvl); //
         this.currentMap.addToMapCoin();
         if(this.tabH.get(0).getScore().getPointsJoueur() == 100){
             
